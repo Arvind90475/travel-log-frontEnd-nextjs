@@ -1,5 +1,9 @@
-import { DarkModeSwitch } from "../components/DarkModeSwitch";
+import GlobalWrapper from "../components/GlobalWrapper";
 
-const Index = () => <DarkModeSwitch />;
+const Index = () => (
+  <>
+    <GlobalWrapper />
+  </>
+);
 
 export default Index;

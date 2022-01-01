@@ -2,6 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import GlobalWrapper from "../components/GlobalWrapper";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
 
@@ -17,48 +18,50 @@ const SignupSchema = Yup.object().shape({
 
 const Register = () => {
   return (
-    <Wrapper variant="small">
-      <Box mt={"50%"}>
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={SignupSchema}
-          onSubmit={(values, actions) => {
-            console.log(values);
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <InputField
-                name="email"
-                label="Email"
-                placeholder="agc@gmail.com"
-                required
-              />
-
-              <Box mt={"6"}>
+    <GlobalWrapper>
+      <Wrapper variant="small">
+        <Box mt={"50%"}>
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={(values, actions) => {
+              console.log(values);
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form>
                 <InputField
-                  name="password"
-                  label="Password"
-                  type="password"
+                  name="email"
+                  label="Email"
+                  placeholder="agc@gmail.com"
                   required
                 />
-              </Box>
-              <Button
-                my={"4"}
-                type="submit"
-                isLoading={isSubmitting}
-                colorScheme="teal"
-              >
-                Submit
-              </Button>
-            </Form>
-          )}
-        </Formik>
-      </Box>
-    </Wrapper>
+
+                <Box mt={"6"}>
+                  <InputField
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  />
+                </Box>
+                <Button
+                  my={"4"}
+                  type="submit"
+                  isLoading={isSubmitting}
+                  colorScheme="teal"
+                >
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+      </Wrapper>
+    </GlobalWrapper>
   );
 };
 export default Register;
