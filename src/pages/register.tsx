@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import GlobalWrapper from "../components/GlobalWrapper";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
-import { useAllLogEntriesQuery } from "../generated/graphql";
+import { useRegisterMutation } from "../generated/graphql";
 
 interface Values {
   email: string;
@@ -18,9 +18,8 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Register = () => {
-  const { data, isLoading } = useAllLogEntriesQuery();
+  const [registerMutation] = useRegisterMutation();
 
-  console.log("data", data?.allLogEntries);
   return (
     <GlobalWrapper>
       <Wrapper variant="small">
@@ -32,7 +31,26 @@ const Register = () => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, actions) => {
-              console.log(values);
+              registerMutation({
+                variables: {
+                  options: {
+                    email: values.email,
+                    password: values.password,
+                    firstName: "firsName",
+                    lastName: "lastName",
+                  },
+                },
+                onError: (err) => {
+                  actions.setErrors({
+                    email: "email errored",
+                    password: "password errored",
+                  });
+                  actions.setSubmitting(false);
+                },
+                onCompleted: (data) => {
+                  actions.setSubmitting(false);
+                },
+              });
             }}
           >
             {({ isSubmitting }) => (
