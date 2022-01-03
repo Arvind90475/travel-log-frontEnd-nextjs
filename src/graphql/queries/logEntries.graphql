@@ -1,0 +1,15 @@
+query {
+  allLogEntries {
+    id
+    title
+    comments
+    visitDate
+    user {
+      firstName
+      lastName
+      email
+      phoneNumber
+      role
+    }
+  }
+}
