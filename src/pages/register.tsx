@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import GlobalWrapper from "../components/GlobalWrapper";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
+import { useAllLogEntriesQuery } from "../generated/graphql";
 
 interface Values {
   email: string;
@@ -17,6 +18,9 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Register = () => {
+  const { data, isLoading } = useAllLogEntriesQuery();
+
+  console.log("data", data?.allLogEntries);
   return (
     <GlobalWrapper>
       <Wrapper variant="small">
