@@ -17,7 +17,12 @@ const InputField: React.FC<Props> = (props) => {
   return (
     <FormControl isInvalid={!!error}>
       <FormLabel htmlFor={field.name}>{props.label}</FormLabel>
-      <Input {...field} id={field.name} type={props.type} />
+      <Input
+        {...field}
+        autoComplete={props.autoComplete}
+        id={field.name}
+        type={props.type}
+      />
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
   );

@@ -1,7 +1,8 @@
-import { Box, Button } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import { Box, Button } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
+import { useRouter } from "next/router";
 import GlobalWrapper from "../components/GlobalWrapper";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
@@ -14,6 +15,7 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const [loginMutation] = useLoginMutation();
+  const { push } = useRouter();
 
   return (
     <GlobalWrapper>
@@ -40,6 +42,7 @@ const Login = () => {
                 },
                 onCompleted: (data) => {
                   actions.setSubmitting(false);
+                  push("/");
                 },
               });
             }}

@@ -13,8 +13,11 @@ interface Values {
 }
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is Required"),
-  password: Yup.string().required("Password is Required").min(6),
+  email: Yup.string().required().email("Invalid email"),
+  password: Yup.string().required().min(6),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+  phoneNumber: Yup.number(),
 });
 
 const Register = () => {
@@ -23,11 +26,14 @@ const Register = () => {
   return (
     <GlobalWrapper>
       <Wrapper variant="small">
-        <Box mt={"50%"}>
+        <Box mt={"40%"} padding={8} borderRadius={"8px"}>
           <Formik
             initialValues={{
               email: "",
               password: "",
+              firstName: "",
+              lastName: "",
+              phoneNumber: "",
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, actions) => {
@@ -36,11 +42,13 @@ const Register = () => {
                   options: {
                     email: values.email,
                     password: values.password,
-                    firstName: "firsName",
-                    lastName: "lastName",
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    phoneNumber: parseInt(values.phoneNumber),
                   },
                 },
                 onError: (err) => {
+                  console.log(err);
                   actions.setErrors({
                     email: "email errored",
                     password: "password errored",
@@ -56,11 +64,37 @@ const Register = () => {
             {({ isSubmitting }) => (
               <Form>
                 <InputField
-                  name="email"
-                  label="Email"
+                  name="firstName"
+                  label="First Name"
                   placeholder="agc@gmail.com"
+                  autoComplete="off"
                   required
                 />
+                <Box mt={"6"}>
+                  <InputField
+                    name="lastName"
+                    label="Last Name"
+                    autoComplete="off"
+                    required
+                  />
+                </Box>
+
+                <Box mt={"6"}>
+                  <InputField
+                    name="email"
+                    label="Email"
+                    autoComplete="off"
+                    required
+                  />
+                </Box>
+
+                <Box mt={"6"}>
+                  <InputField
+                    name="phoneNumber"
+                    label="Phone Number"
+                    type="number"
+                  />
+                </Box>
 
                 <Box mt={"6"}>
                   <InputField
@@ -70,6 +104,7 @@ const Register = () => {
                     required
                   />
                 </Box>
+
                 <Button
                   my={"4"}
                   type="submit"
