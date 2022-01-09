@@ -1,12 +1,10 @@
 import React from "react";
-import { DarkModeSwitch } from "./DarkModeSwitch";
-import Navbar from "./Navbar";
+import Nav from "./Nav";
 
 const GlobalWrapper: React.FC<{}> = ({ children }) => {
   return (
     <>
-      <Navbar />
-      <DarkModeSwitch />
+      <Nav />
       {children}
     </>
   );

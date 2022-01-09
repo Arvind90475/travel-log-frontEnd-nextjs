@@ -1,13 +1,21 @@
 import GlobalWrapper from "../components/GlobalWrapper";
-import { useAllLogEntriesQuery } from "../generated/graphql";
+import { useAllLogEntriesQuery, useMeQuery } from "../generated/graphql";
 
 const Index = () => {
-  const { data, error } = useAllLogEntriesQuery();
+  const { data } = useAllLogEntriesQuery();
+  const { data: res, error } = useMeQuery();
 
   return (
     <>
       <GlobalWrapper />
-      <pre>{JSON.stringify(data?.allLogEntries, null, 2)}</pre>
+      {error ? (
+        <h1>{error.message}</h1>
+      ) : (
+        <>
+          <pre>{JSON.stringify(res?.me, null, 2)}</pre>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </>
+      )}
     </>
   );
 };
