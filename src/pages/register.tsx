@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, FormErrorMessage } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -26,7 +26,7 @@ const Register = () => {
   return (
     <GlobalWrapper>
       <Wrapper variant="small">
-        <Box mt={"40%"} padding={8} borderRadius={"8px"}>
+        <Box mt={"20%"} padding={8} borderRadius={"8px"}>
           <Formik
             initialValues={{
               email: "",
@@ -40,10 +40,7 @@ const Register = () => {
               registerMutation({
                 variables: {
                   options: {
-                    email: values.email,
-                    password: values.password,
-                    firstName: values.firstName,
-                    lastName: values.lastName,
+                    ...values,
                     phoneNumber: parseInt(values.phoneNumber),
                   },
                 },
@@ -63,6 +60,7 @@ const Register = () => {
           >
             {({ isSubmitting }) => (
               <Form>
+                <FormErrorMessage>{}</FormErrorMessage>
                 <InputField
                   name="firstName"
                   label="First Name"

@@ -29,10 +29,7 @@ const Login = () => {
             validationSchema={SignupSchema}
             onSubmit={(values, actions) => {
               loginMutation({
-                variables: {
-                  email: values.email,
-                  password: values.password,
-                },
+                variables: values,
                 onError: (err) => {
                   actions.setErrors({
                     email: "email errored",

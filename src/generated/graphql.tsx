@@ -258,7 +258,7 @@ export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   RegisterMutationVariables
 >;
 export const AllLogEntriesDocument = gql`
-  query allLogEntries {
+  query AllLogEntries {
     allLogEntries {
       id
       title

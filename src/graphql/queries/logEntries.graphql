@@ -1,4 +1,4 @@
-query allLogEntries {
+query AllLogEntries {
   allLogEntries {
     id
     title
