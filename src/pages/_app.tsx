@@ -5,7 +5,7 @@ import { AppProps } from "next/app";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://travel-log-graphql-api.herokuapp.com/graphql",
   cache: new InMemoryCache(),
   credentials: "include",
 });
