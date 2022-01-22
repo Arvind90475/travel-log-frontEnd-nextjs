@@ -6,10 +6,9 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const uri =
   process.env.NODE_ENV === "development"
-    ? "https://travel-log-graphql-api.herokuapp.com"
-    : "http://localhost:4000";
+    ? "http://localhost:4000"
+    : process.env.API_URL;
 
-console.log(uri);
 const client = new ApolloClient({
   uri: `${uri}/graphql`,
   cache: new InMemoryCache(),
