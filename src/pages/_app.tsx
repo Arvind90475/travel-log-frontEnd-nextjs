@@ -4,8 +4,13 @@ import theme from "../theme";
 import { AppProps } from "next/app";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
+const uri =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:4000"
+    : process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
 const client = new ApolloClient({
-  uri: "https://travel-log-graphql-api.herokuapp.com/graphql",
+  uri: `${uri}/graphql`,
   cache: new InMemoryCache(),
   credentials: "include",
 });
