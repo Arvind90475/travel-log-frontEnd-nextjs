@@ -1,22 +1,27 @@
 import GlobalWrapper from "../components/GlobalWrapper";
-import { useAllLogEntriesQuery, useMeQuery } from "../generated/graphql";
+import NestedMenu from "../components/NestedMenu";
+import { useAllLogEntriesQuery } from "../generated/graphql";
 
 const Index = () => {
-  const { data } = useAllLogEntriesQuery();
-  const { data: res, error } = useMeQuery();
+  const { data, loading, error } = useAllLogEntriesQuery({
+    variables: {
+      options: {limit: 10}
+    }
+  });
+
+  if (loading) return <h1>Loading...</h1>;
 
   return (
-    <>
-      <GlobalWrapper />
+    <GlobalWrapper>
       {error ? (
         <h1>{error.message}</h1>
       ) : (
         <>
-          <pre>{JSON.stringify(res?.me, null, 2)}</pre>
           <pre>{JSON.stringify(data, null, 2)}</pre>
+          <NestedMenu />
         </>
       )}
-    </>
+    </GlobalWrapper>
   );
 };
 

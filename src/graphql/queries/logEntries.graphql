@@ -1,15 +1,19 @@
-query AllLogEntries {
-  allLogEntries {
-    id
-    title
-    comments
-    visitDate
-    user {
-      firstName
-      lastName
-      email
-      phoneNumber
-      role
+query AllLogEntries($options: LogEntriesInput) {
+  allLogEntries(options: $options) {
+    hasNext
+    count
+    logEntries {
+      id
+      title
+      comments
+      visitDate
+      user {
+        firstName
+        lastName
+        email
+        phoneNumber
+        role
+      }
     }
   }
 }
