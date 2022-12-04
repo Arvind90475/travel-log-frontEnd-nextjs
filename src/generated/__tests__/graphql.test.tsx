@@ -4,7 +4,7 @@ import {MockedProvider} from "@apollo/client/testing";
 import {ReactNode} from "react";
 
 describe('useMeQuery', () => {
-    it('is a thing', async () => {
+    it('Should load data', async () => {
 
         const wrapper = ({children}: {children: ReactNode}) => {
             const mockResponse = {
